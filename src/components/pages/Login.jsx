@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { loginUser, refreshUser } from 'redux/operations';
-import { getIsLogged } from 'redux/selectors';
+import { loginUser, refreshUser } from '../../redux/operations';
+import { getIsLogged } from '../../redux/selectors';
 import Navigation from 'components/Navigation/Navigation';
 
 
