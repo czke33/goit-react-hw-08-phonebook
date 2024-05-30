@@ -7,14 +7,15 @@ const client=axios.create({
 
 client.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
-    config.headers['Authorization'] = `Bearer ${token}`;
+    config.headers.Authorization= `Bearer ${token}`;
     return config;
-}, (error) => Promise.reject(error));
+}
+);
 
 export const loginUser = createAsyncThunk('user/login', 
 async ({email, password}, thunkAPI) => {
     try {
-        const response = await client.post('/users/login', {email, password});
+        const response = await client.post('/user/login', {email, password});
         localStorage.setItem('token', response.data.token);
         return response.data;
     } catch (error) {
@@ -29,21 +30,21 @@ async (_, thunkAPI) => {
     const token = localStorage.getItem('token');
     if (token){
     try {
-        const response = await client.get('/users/current');
+        const response = await client.get('/user/current');
         return response.data;
     } catch (error) {
         alert(error.message)
         return thunkAPI.rejectWithValue(error.message);
     }
 }else{
-    return thunkAPI.rejectWithValue('No token');}
+    return thunkAPI.rejectWithValue(null);}
 })
 
 
 export const logoutUser=createAsyncThunk('user/logout',
 async (_, thunkAPI) => {
     try {
-         await client.post(`/users/logout`);
+         await client.post(`/user/logout`);
         localStorage.clear();
 
     } catch (error) {
@@ -54,13 +55,14 @@ async (_, thunkAPI) => {
 export const registerUser=createAsyncThunk('user/register',
 async ({name, email, password}, thunkAPI) => {
     try {
-        const response = await client.post('/users/singup', {name, email, password});
+        const response = await client.post('/user/singup', {name, email, password});
         localStorage.setItems('token', response.data.token);
         return response.data;
     } catch (error) {
         alert(error.message);
         return thunkAPI.rejectWithValue(error.message);
-    }})
+    }});
+    
 export const fetchContacts = createAsyncThunk(
     'contacts/fetchAll',
     async (_, thunkAPI) => {

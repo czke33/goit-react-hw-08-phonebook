@@ -20,7 +20,7 @@ const Login = () => {
     }
   }, [isLogged, dispatch, navigate]);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(
       loginUser({ email, password }),

@@ -20,7 +20,7 @@ const Register = () => {
     }
   }, [isLogged, dispatch, navigate]);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(registerUser({ name, email, password }));
     setName('');
