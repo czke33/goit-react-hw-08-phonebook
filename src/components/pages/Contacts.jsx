@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ContactForm from '../ContactForm/ContactForm';
 import Filter from '../Filter/Filter';
 import ContactList from '../ContactList/ContactList';
-import UserMenu from 'components/UserMenu/UserMenu';
+import UserMenu from '../../components/UserMenu/UserMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from '../../redux/operations';
 import { getError, getIsLoading } from '../../redux/selectors';
