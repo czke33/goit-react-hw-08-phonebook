@@ -2,17 +2,17 @@ import axios from 'axios';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const client=axios.create({
-    baseURL:'https://connections-api.herokuapp.com'
+    baseURL:'https://connections-api.herokuapp.com/',
 });
 
+
 client.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token');
-    config.headers.Authorization= `Bearer ${token}`;
+    config.headers['Authorization']= `Bearer ${localStorage.getItem('token')}`;
     return config;
 }
 );
 
-export const loginUser = createAsyncThunk('users/login', 
+export const loginUser = createAsyncThunk('user/login', 
 async ({email, password}, thunkAPI) => {
     try {
         const response = await client.post('/users/login', {email, password});
@@ -25,7 +25,7 @@ async ({email, password}, thunkAPI) => {
 }
 );
 
-export const refreshUser=createAsyncThunk('users/refresh',
+export const refreshUser=createAsyncThunk('user/refresh',
 async (_, thunkAPI) => {
     const token = localStorage.getItem('token');
     if (token){
@@ -41,7 +41,7 @@ async (_, thunkAPI) => {
 })
 
 
-export const logoutUser=createAsyncThunk('users/logout',
+export const logoutUser=createAsyncThunk('user/logout',
 async (_, thunkAPI) => {
     try {
          await client.post(`/users/logout`);
@@ -51,8 +51,9 @@ async (_, thunkAPI) => {
         alert(error.message);
         return thunkAPI.rejectWithValue(error.message);
     }
-});
-export const registerUser=createAsyncThunk('users/register',
+},
+);
+export const registerUser=createAsyncThunk('user/register',
 async ({name, email, password}, thunkAPI) => {
     try {
         const response = await client.post('/users/signup', {name, email, password});

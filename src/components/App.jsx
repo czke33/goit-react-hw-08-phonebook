@@ -15,8 +15,9 @@ import Register from './pages/Register';
 
 
 const App = () => {
-	const dispatch=useDispatch();
   const isLogged=useSelector(getIsLogged);
+	const dispatch=useDispatch();
+  
   
 
   useEffect(() => {
@@ -24,6 +25,7 @@ const App = () => {
   }, [dispatch]);
 
     return (
+      <>
       <div className={style.container}>
          <section>
           <Routes>
@@ -40,6 +42,7 @@ const App = () => {
         </section>
        
       </div>
+      </>
     );
   }
 

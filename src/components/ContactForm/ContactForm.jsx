@@ -9,8 +9,8 @@ const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
 
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -21,8 +21,8 @@ const ContactForm = () => {
      
     if (!isInBase) {
       dispatch(addContact({name, number}));
-      setName("");
-      setNumber("");
+      setName('');
+      setNumber('');
     } else {
       alert(`${name} is in use. Try another name.`);
     }
@@ -40,7 +40,7 @@ const ContactForm = () => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Charles de Batz de Castelmore d'Artagnan"
           required
         />
-        <label htmlFor="number" id="label"className={style.label}>Number</label>
+        <label htmlFor="number" className={style.label}>Number</label>
         <input
           type="tel"
           name="number"

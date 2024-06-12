@@ -3,14 +3,14 @@ import {loginUser, logoutUser, registerUser, refreshUser} from '../redux/operati
 
 const initialState = {
   isLogged: false,
-  email: '',
-  name: '',
+  email: null,
+  name: null,
   isLoading: false,
   error:null,}
 
   const userSlice = createSlice({
     name:'auth',
-    initialState:initialState,
+    initialState,
     extraReducers:builder=> {
         builder
         .addCase(loginUser.pending, state => {
