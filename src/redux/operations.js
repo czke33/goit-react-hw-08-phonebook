@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const client=axios.create({
-    baseURL:'https://connections-api.herokuapp.com/'
+    baseURL:'https://connections-api.herokuapp.com'
 });
 
 client.interceptors.request.use((config) => {
@@ -12,10 +12,10 @@ client.interceptors.request.use((config) => {
 }
 );
 
-export const loginUser = createAsyncThunk('user/login', 
+export const loginUser = createAsyncThunk('users/login', 
 async ({email, password}, thunkAPI) => {
     try {
-        const response = await client.post('/user/login', {email, password});
+        const response = await client.post('/users/login', {email, password});
         localStorage.setItem('token', response.data.token);
         return response.data;
     } catch (error) {
@@ -25,12 +25,12 @@ async ({email, password}, thunkAPI) => {
 }
 );
 
-export const refreshUser=createAsyncThunk('user/refresh',
+export const refreshUser=createAsyncThunk('users/refresh',
 async (_, thunkAPI) => {
     const token = localStorage.getItem('token');
     if (token){
     try {
-        const response = await client.get('/user/current');
+        const response = await client.get('/users/current');
         return response.data;
     } catch (error) {
         alert(error.message)
@@ -41,10 +41,10 @@ async (_, thunkAPI) => {
 })
 
 
-export const logoutUser=createAsyncThunk('user/logout',
+export const logoutUser=createAsyncThunk('users/logout',
 async (_, thunkAPI) => {
     try {
-         await client.post(`/user/logout`);
+         await client.post(`/users/logout`);
         localStorage.clear();
 
     } catch (error) {
@@ -52,10 +52,10 @@ async (_, thunkAPI) => {
         return thunkAPI.rejectWithValue(error.message);
     }
 });
-export const registerUser=createAsyncThunk('user/register',
+export const registerUser=createAsyncThunk('users/register',
 async ({name, email, password}, thunkAPI) => {
     try {
-        const response = await client.post('/user/singup', {name, email, password});
+        const response = await client.post('/users/singup', {name, email, password});
         localStorage.setItems('token', response.data.token);
         return response.data;
     } catch (error) {
