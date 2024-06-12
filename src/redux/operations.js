@@ -55,7 +55,7 @@ async (_, thunkAPI) => {
 export const registerUser=createAsyncThunk('users/register',
 async ({name, email, password}, thunkAPI) => {
     try {
-        const response = await client.post('/users/singup', {name, email, password});
+        const response = await client.post('/users/signup', {name, email, password});
         localStorage.setItems('token', response.data.token);
         return response.data;
     } catch (error) {
