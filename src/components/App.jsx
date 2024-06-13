@@ -11,40 +11,35 @@ import Contacts from './pages/Contacts';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
- 
-
 
 const App = () => {
-  const isLogged=useSelector(getIsLogged);
-	const dispatch=useDispatch();
-  
-  
+  const isLogged = useSelector(getIsLogged);
+  const dispatch = useDispatch();
+
+
 
   useEffect(() => {
-   dispatch(refreshUser());
+    dispatch(refreshUser());
   }, [dispatch]);
 
-    return (
-      <>
+  return (
+    <>
       <div className={style.container}>
-         <section>
+        <section>
           <Routes>
             <Route
               exact
               path="/"
-              element={
-                isLogged ? <Contacts /> : <Navigate replace to={'login'} />
-              }
-            />
+              element={isLogged ? <Contacts /> : <Navigate replace to={'login'} />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </Routes>
         </section>
-       
+
       </div>
-      </>
-    );
-  }
+    </>
+  );
+}
 
 
 export default App;
